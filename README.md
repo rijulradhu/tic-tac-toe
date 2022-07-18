@@ -6,8 +6,10 @@ To play, download the jar file from the repo and type the given command in termi
 ```
 java -jar path/to/the/jar/file/TicTacToe.jar
 ```
+NOTE: THE PROGRAM IS CASE-SENSITIVE
 
-To start the game, you have two options: **start** or **exit**
+To start the game, you have two options: 
+## **start** / **exit**
 
 To play the game, you can write **start user easy**
 
@@ -76,3 +78,8 @@ Enter the coordinates:
 ```
 
 Type **exit** to close the game
+
+## Levels of difficulty
+1. **Easy** - It moves on random available squares without considering if it'll win or lose.
+2. **Medium** - It moves on random available squares when neither itself or the player against it is one step far from winning. It checks if it can win in one move or lose in one move and plays accordingly to win or draw.
+3. **Hard** - It moves on squares by using minimax algorithm. Using this algorithm, it backtracks all the possible outcomes of the board and chooses the one with the probability to win. 
