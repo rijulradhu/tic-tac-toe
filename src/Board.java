@@ -2,6 +2,7 @@ public class Board {
     public static char[][] board = new char[3][3];
     final private Player player = new Player();
 
+    //Create board instance with required places filled
     public Board(String boardState){
         char[] boardArray = boardState.toCharArray();
         int k = 0;
@@ -34,11 +35,12 @@ public class Board {
     }
 
 
-
+    //Run in Main class to start the game
     public void start(String player1, String player2){
         printBoard();
-        while (true){
-            switch (player1) {
+        //Loop runs till some wins or the game draws
+        while(true){
+            switch (player1) {                              //Selecting the first player
                 case "user" -> player.moveUser(1);
                 case "easy" -> player.moveEasy(1);
                 case "medium" -> player.moveMedium(1);
@@ -53,7 +55,7 @@ public class Board {
                 System.out.println("Draw");
                 break;
             }
-            switch (player2) {
+            switch (player2) {                              //Selecting the second player
                 case "user" -> player.moveUser(2);
                 case "easy" -> player.moveEasy(2);
                 case "medium" -> player.moveMedium(2);
@@ -71,6 +73,7 @@ public class Board {
         }
     }
 
+    //Used in winner method for checking who won
     private boolean winnerX(){
         return winnerCheck('X');
     }
@@ -80,16 +83,21 @@ public class Board {
     }
 
     static boolean winnerCheck(char xo){
+        //Checking diagonals if complete
         if((Board.board[0][0] == Board.board[1][1] && Board.board[1][1] == Board.board[2][2]) || (Board.board[0][2] == Board.board[1][1] && Board.board[1][1] == Board.board[2][0])){
             if(Board.board[1][1] == xo)
                 return true;
         }
+
+        //Checking rows if complete
         for(int i = 0; i<3;i++){
             if(Board.board[i][0]==Board.board[i][1] && Board.board[i][1] == Board.board[i][2]){
                 if(Board.board[i][0] == xo)
                     return true;
             }
         }
+
+        //Checking columns if complete
         for(int i = 0; i<3;i++){
             if(Board.board[0][i]==Board.board[1][i] && Board.board[1][i] == Board.board[2][i]){
                 if(Board.board[0][i] == xo)
@@ -99,6 +107,7 @@ public class Board {
         return false;
     }
 
+    //Check if X won, O won or is it a draw
     public char winner(){
         if(winnerX()){
             return 'X';

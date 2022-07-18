@@ -4,13 +4,9 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Player {
-    List<Integer> position = new ArrayList<>();
     char[][] board = Board.board;
-    public Player(){
-        for(int i = 0; i<9;i++){
-            position.add(i+1);
-        }
-    }
+
+    //Updates the board for each player on their chance. Asks input again if values not given correctly
     public void moveUser(int pos){
         while(true) {
             try {
@@ -34,6 +30,7 @@ public class Player {
         }
     }
 
+    //Used to get random number for moving on board
     public int getRandom(){
         Random random = new Random();
         int number = random.nextInt(9);
@@ -43,12 +40,14 @@ public class Player {
         return number;
     }
 
+    //It uses getRandom to make a move
     public void moveEasy(int pos){
         System.out.println("Making move level \"easy\"");
         int number = getRandom();
         board[number/3][number%3] = pos == 1 ? 'X' : 'O';
     }
 
+    //It uses getRandom to make a move if neither player is winning. Else it judges if it is winning in one move or losing in one
     public void moveMedium(int pos){
         System.out.println("Making move level \"medium\"");
         int[] move = winPossible(pos == 1? 'X':'O');
@@ -65,6 +64,7 @@ public class Player {
         }
     }
 
+    //It uses minimax algorithm to track all the possible outcomes of the moves and decides the one where it has the max chance to win
     public void moveHard(int pos){
         System.out.println("Making move level \"hard\"");
         Move best = minimax(board,pos,pos);
@@ -108,18 +108,18 @@ public class Player {
 
         Move best = null;
         if(realPlayer == currentPlayer){
-            int min = -10000;
+            int max = -10000;
             for(Move move: moves){
-                if(move.score > min){
-                    min = move.score;
+                if(move.score > max){
+                    max = move.score;
                     best = move;
                 }
             }
         }else{
-            int max = 10000;
+            int min = 10000;
             for(Move move: moves){
-                if(move.score < max){
-                    max = move.score;
+                if(move.score < min){
+                    min = move.score;
                     best = move;
                 }
             }
@@ -128,6 +128,7 @@ public class Player {
         return best;
     }
 
+    //Checks the available indices for putting the next move
     public List<int[]> emptyIndices(char[][] board){
         List<int[]> ans = new ArrayList<>();
         for(int i = 0;i<3;i++){
@@ -140,6 +141,7 @@ public class Player {
         return ans;
     }
 
+    //It checks if the win is possible in a move
     public int[] winPossible(char c){
         if((board[0][0] == c && board[2][2] == c && board[1][1] == ' ') || (board[0][2] == c && board[2][0] == c && board[1][1] == ' ')){
             return new int[]{1,1};
