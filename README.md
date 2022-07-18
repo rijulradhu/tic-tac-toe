@@ -82,4 +82,4 @@ Type **exit** to close the game
 ## Levels of difficulty
 1. **Easy** - It moves on random available squares without considering if it'll win or lose.
 2. **Medium** - It moves on random available squares when neither itself or the player against it is one step far from winning. It checks if it can win in one move or lose in one move and plays accordingly to win or draw.
-3. **Hard** - It moves on squares by using minimax algorithm. Using this algorithm, it backtracks all the possible outcomes of the board and chooses the one with the probability to win. 
+3. **Hard** - It moves on squares by using minimax algorithm. Using this algorithm, it backtracks all the possible outcomes of the board and chooses the one with the maximum score to win the game. 
